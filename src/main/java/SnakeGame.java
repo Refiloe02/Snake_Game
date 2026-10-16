@@ -1,13 +1,12 @@
 import java.util.*;
+import javax.swing.Timer;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Random;
 import javax.swing.*;
 
-public class SnakeGame extends JPanel{
+public class SnakeGame extends JPanel implements ActionListener{
 
     private class Tile{
         int x;
@@ -21,12 +20,17 @@ public class SnakeGame extends JPanel{
 
     int boardWidth;
     int boardHeight;
-    int titleSize = 25;
+    int titleSize = 25; 
 
     Tile snakeHead;
     
     Tile food;
     Random random;
+
+    //game logic
+    Timer gameLoop;
+    int velocityX;
+    int velocityY;
 
     SnakeGame(int boardWidth, int boardHeight){
         this.boardWidth = boardWidth;
@@ -39,6 +43,12 @@ public class SnakeGame extends JPanel{
         food = new Tile(10, 10);
         random = new Random();
         placefood();
+
+        velocityX = 0;
+        velocityY = 1;
+
+        gameLoop = new Timer(100, this);
+        gameLoop.start();
     }
 
     public void paintComponent(Graphics g){
@@ -68,5 +78,15 @@ public class SnakeGame extends JPanel{
         food.x = random.nextInt(boardWidth/titleSize);
         food.y = random.nextInt(boardHeight/titleSize);
     }
+
+    public void move(){
+        snakeHead.x += velocityX;
+        snakeHead.y += velocityY;
+    }
     
+    @Override 
+    public void actionPerformed(ActionEvent e){
+        move();
+        repaint();
+    }
 }
