@@ -26,6 +26,7 @@ public class SnakeGame extends JPanel{
     Tile snakeHead;
     
     Tile food;
+    Random random;
 
     SnakeGame(int boardWidth, int boardHeight){
         this.boardWidth = boardWidth;
@@ -36,6 +37,8 @@ public class SnakeGame extends JPanel{
         snakeHead = new Tile(5, 5);
 
         food = new Tile(10, 10);
+        random = new Random();
+        placefood();
     }
 
     public void paintComponent(Graphics g){
@@ -59,6 +62,11 @@ public class SnakeGame extends JPanel{
         //Snake
         g.setColor(Color.green);
         g.fillRect(snakeHead.x * titleSize, snakeHead.y * titleSize, titleSize, titleSize);
+    }
+
+    public void placefood(){
+        food.x = random.nextInt(boardWidth/titleSize);
+        food.y = random.nextInt(boardHeight/titleSize);
     }
     
 }
