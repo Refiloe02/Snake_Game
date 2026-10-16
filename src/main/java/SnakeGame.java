@@ -9,7 +9,7 @@ import javax.swing.*;
 
 public class SnakeGame extends JPanel implements ActionListener, KeyListener{
 
-    private class Tile{
+    class Tile{
         int x;
         int y;
 
@@ -65,19 +65,21 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener{
     public void draw(Graphics g){
 
         //Grid
-        for(int i = 0; i < boardWidth/titleSize; i++){
-            //(x1, y1, x2, y2)
-            g.drawLine(i*titleSize, 0, i*titleSize, boardHeight); //vertical lines
-            g.drawLine(0, i*titleSize, boardWidth, i*titleSize); //Horizontal lines
-        }
+        // for(int i = 0; i < boardWidth/titleSize; i++){
+        //     //(x1, y1, x2, y2)
+        //     g.drawLine(i*titleSize, 0, i*titleSize, boardHeight); //vertical lines
+        //     g.drawLine(0, i*titleSize, boardWidth, i*titleSize); //Horizontal lines
+        // }
 
         //food
         g.setColor(Color.red);
-        g.fillRect(food.x * titleSize, food.y * titleSize, titleSize, titleSize);
+        // g.fillRect(food.x * titleSize, food.y * titleSize, titleSize, titleSize);
+        g.fill3DRect(food.x * titleSize, food.y * titleSize, titleSize, titleSize, true);
 
         //Snake head
         g.setColor(Color.green);
-        g.fillRect(snakeHead.x * titleSize, snakeHead.y * titleSize, titleSize, titleSize);
+        // g.fillRect(snakeHead.x * titleSize, snakeHead.y * titleSize, titleSize, titleSize);
+        g.fill3DRect(snakeHead.x * titleSize, snakeHead.y * titleSize, titleSize, titleSize, true);
 
         //Snake body
         for (int i = 0; i < snakeBody.size(); i++){
